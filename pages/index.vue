@@ -1,6 +1,6 @@
 <template>
   <div class="w-[100wv] h-[100vh] relative" @click="setToggleTrue">
-    <main class="mx-auto py-52 w-fit">
+    <main class="mx-auto pt-52 w-fit">
       <section class="flex flex-col w-[350px] justify-center items-center">
         <div class="w-[150px] h-[150px]">
           <img src="/assets/images/dark-bg.png" class="rounded-full" />
@@ -13,20 +13,37 @@
             Click Anywhere or Insert Password
           </p>
         </div>
-        <div v-if="pwToggle" class="mt-4 flex flex-col gap-3 items-center">
+        <div
+          v-if="pwToggle"
+          class="mt-4 flex flex-col gap-3 items-center relative"
+        >
           <input
             class="bg-white bg-opacity-30 rounded-full p-1 px-4 text-sm w-[165px] text-white placeholder-gray-300 shadow-black/30 shadow-lg focus-visible:outline-none"
             placeholder="암호 입력"
             type="password"
+            @input="inputPw"
+            v-model="passwd"
+            @keyup.enter="$router.push({ path: '/desktop' })"
           />
+          <NuxtLink to="/desktop">
+            <button
+              class="absolute top-1 right-2 rounded-full border-white border-2 opacity-60"
+              v-if="passwd.length > 0"
+            >
+              <img
+                src="/assets/images/arrow-right.svg"
+                width="16px"
+                height="16px"
+              /></button
+          ></NuxtLink>
           <p class="text-sm text-gray-200 drop-shadow-2xl shadow-black">
-            Click Anywhere or Insert Password
+            Insert Any Password
           </p>
         </div>
       </section>
     </main>
     <button
-      class="w-[40px] h-[40px] absolute bottom-24 left-[50%] transform-[translate(0, -50%)] bg-gray-600 bg-opacity-20 rounded-full"
+      class="w-[40px] h-[40px] absolute bottom-24 left-[50%] -translate-x-[50%] bg-gray-600 bg-opacity-20 rounded-full"
       @click="setToggleFalse"
       v-if="pwToggle"
     >
@@ -42,6 +59,7 @@
 export default {
   data: () => ({
     pwToggle: false,
+    passwd: "",
   }),
   methods: {
     setToggleTrue() {
@@ -50,6 +68,9 @@ export default {
     setToggleFalse(e: Event) {
       e.stopPropagation();
       this.pwToggle = false;
+    },
+    inputPw(e: Event) {
+      this.passwd = (e.target as HTMLInputElement).value;
     },
   },
 };
