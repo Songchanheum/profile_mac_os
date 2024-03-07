@@ -27,7 +27,6 @@ import { useProgramStore } from "~/stores/program";
 const store = useProgramStore();
 // 반응형 객체로 변환
 const { getProgram } = storeToRefs(store);
-console.log(getProgram.value);
 
 const removeProgram = () => {
   store.deleteProgram(getProgram.value);

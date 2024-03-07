@@ -1,6 +1,6 @@
 <template>
-  <button @click="setProgram" class="h-10 w-10 bg-white rounded-xl">
-    {{ name }}
+  <button @click="setProgram" class="h-10 w-10 bg-white rounded-xl opacity-90">
+    <img :src="`/_nuxt/assets/images/program/${img}`" />
   </button>
 </template>
 
@@ -12,8 +12,12 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  img: {
+    type: String,
+    required: true,
+  },
 });
-const { name } = props;
+const { name, img } = props;
 
 // 스토어 생성
 const store = useProgramStore();

@@ -7,14 +7,14 @@ import macHeader from '~/components/macHeader.vue'; import component from
     <MacHeader :isDesktop="true" />
     <slot />
     <div
-      class="flex items-center gap-4 justify-center w-fit px-2 h-14 bg-white bg-opacity-25 opacity-40 border-white border-[1px] rounded-xl absolute bottom-1 left-[50%] -translate-x-[50%]"
+      class="flex items-center gap-4 justify-center w-fit px-2 h-14 bg-white bg-opacity-10 border-gray-400 border-[1px] rounded-xl absolute bottom-1 left-[50%] -translate-x-[50%]"
     >
-      <MacIcon name="finder" />
-      <MacIcon name="launchbox" />
-      <MacIcon name="chrome" />
-      <MacIcon name="vscode" />
-      <MacIcon name="message" />
-      <MacIcon name="kakao" />
+      <MacIcon name="finder" img="finder.png" />
+      <MacIcon name="launchpad" img="launchpad.png" />
+      <MacIcon name="chrome" img="chrome.svg" />
+      <MacIcon name="vscode" img="vscode.png" />
+      <MacIcon name="message" img="message.png" />
+      <MacIcon name="note" img="note.svg" />
     </div>
   </div>
 </template>
