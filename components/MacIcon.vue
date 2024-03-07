@@ -1,6 +1,6 @@
 <template>
   <button @click="setProgram" class="h-10 w-10 bg-white rounded-xl opacity-90">
-    <img :src="`_nuxt/assets/images/program/${img}`" />
+    <img :src="`~/assets/images/program/${img}`" />
   </button>
 </template>
 
