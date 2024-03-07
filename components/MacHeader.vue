@@ -1,12 +1,20 @@
 <template>
   <header
-    class="w-full bg-white h-6 bg-opacity-10 text-xs flex justify-between px-6 items-center text-white"
+    class="w-full bg-white h-10 bg-opacity-10 text-xs flex justify-between px-6 items-center text-white"
   >
-    <div>맥</div>
-    <div>{{ time }}</div>
+    <div>
+      <div v-if="isDesktop">
+        <img src="/assets/images/apple.svg" width="18" height="18" />
+      </div>
+    </div>
+    <div class="flex gap-4 items-center">
+      <img src="/assets/images/battery.svg" width="18" height="18" />
+      <img src="/assets/images/wifi.svg" width="18" height="18" />
+      <p>{{ time }}</p>
+    </div>
   </header>
 </template>
-
+¬
 <script lang="ts">
 export default {
   props: {
