@@ -1,7 +1,7 @@
 <template>
   <section
     v-if="getProgram !== null && getProgram !== '' && getProgram"
-    class="w-full h-[calc(100%-102px)] flex bg-gray-800 flex-col rounded-lg relative"
+    class="w-full h-[calc(100%-102px)] flex bg-gray-800 flex-col rounded-lg relative border-gray-600 border-[0.1px]"
   >
     <div class="absolute px-3 flex gap-2 top-3">
       <button
