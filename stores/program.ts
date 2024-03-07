@@ -4,8 +4,7 @@ export const useProgramStore = defineStore({
   id: "myProgramStore",
   state: () => ({ programList: [] as string[] }),
   getters: {
-    getProgram: (state): string =>
-      state.programList[state.programList.length - 1],
+    getProgram: (state): string[] => state.programList,
   },
   actions: {
     addProgram(data: string) {
