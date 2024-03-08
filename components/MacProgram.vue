@@ -140,6 +140,9 @@ const resizeMove = (e: MouseEvent) => {
     console.log(initOffset.offsetX, initOffset.offsetWidth);
     offsetObject.left = (e.pageX > 0 ? e.pageX : 0) + "px";
     offsetObject.width = compWidth + "px";
+  } else if (isResizeDrag.value === "bottom") {
+    const compY = e.pageY - initOffset.offsetHeight;
+    offsetObject.height = (compY > 0 ? compY : 0) + "px";
   }
 };
 
