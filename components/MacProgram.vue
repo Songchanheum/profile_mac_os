@@ -114,7 +114,7 @@ const handleDrop = (e: MouseEvent) => {
   if (isDrag.value) {
     const compX = e.pageX - initOffset.offsetX;
     const compY = e.pageY - initOffset.offsetY;
-    offsetObject.left = (compX > 0 ? compX : 0) + "px";
+    offsetObject.left = (e.pageX > 0 ? compX : 0) + "px";
     offsetObject.top = (compY > 0 ? compY : 0) + "px";
   }
 };
