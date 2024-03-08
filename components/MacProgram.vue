@@ -3,6 +3,8 @@
     class="bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px]"
     :style="offsetObject"
     ref="el"
+    @mousemove="resizeMove"
+    @mouseup="handleMouseUp"
   >
     <div class="absolute flex w-full items-center py-2">
       <p
