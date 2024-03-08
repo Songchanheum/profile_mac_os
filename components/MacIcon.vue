@@ -1,6 +1,9 @@
 <template>
-  <button @click="setProgram" class="h-10 w-10 bg-white rounded-xl opacity-90">
-    <img :src="`/program/${img}`" />
+  <button
+    @click="setProgram"
+    class="h-10 w-10 bg-white rounded-xl opacity-90 hover:scale-125 transition-transform ease-in-out duration-200"
+  >
+    <img :src="`/program/${img}`" class="rounded-xl" />
   </button>
 </template>
 

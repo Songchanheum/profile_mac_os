@@ -21,39 +21,14 @@
         {{ program }}
       </p>
     </div>
-    <div class="mt-10 w-full h-[calc(100%-40px)]">
+    <div class="mt-10 w-full h-[calc(100%-40px)]" v-if="programInfo">
       <iframe
-        v-if="program === 'Chrome'"
-        src="https://www.google.com/webhp?igu=1"
+        v-if="programInfo.src"
+        :src="programInfo.src"
+        :title="programInfo.name"
         frameborder="0"
         height="100%"
         width="100%"
-        title="Chrome"
-      ></iframe>
-      <iframe
-        v-if="program === 'Visual Studio Code'"
-        src="https://github1s.com/Songchanheum/profile_mac_os/blob/main/pages/index.vue"
-        frameborder="0"
-        height="100%"
-        width="100%"
-        title="VSCode"
-      ></iframe>
-
-      <iframe
-        v-if="program === 'Songs blog'"
-        src="https://songsblog.vercel.app/"
-        frameborder="0"
-        height="100%"
-        width="100%"
-        title="Chrome"
-      ></iframe>
-      <iframe
-        v-if="program === 'Github'"
-        src="https://github.com/Songchanheum/"
-        frameborder="0"
-        height="100%"
-        width="100%"
-        title="Chrome"
       ></iframe>
     </div>
   </article>
@@ -61,6 +36,7 @@
 
 <script lang="ts" setup>
 import { useProgramStore } from "~/stores/program";
+import { PROGRAM_LIST } from "~/common/constants";
 
 const props = defineProps({
   program: {
@@ -73,7 +49,7 @@ const props = defineProps({
   },
 });
 const { program, index } = props;
-
+const programInfo = PROGRAM_LIST.find((e) => e.name === program);
 // 스토어 생성
 const store = useProgramStore();
 
