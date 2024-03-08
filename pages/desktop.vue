@@ -1,7 +1,7 @@
 <template>
-  <section class="w-full h-[calc(100%-102px)] relative">
+  <section class="w-full h-full relative overflow-hidden">
     <div v-for="(item, idx) in getProgram" :key="idx">
-      <MacProgram :program="item" />
+      <MacProgram :program="item" :index="idx" />
     </div>
   </section>
 </template>

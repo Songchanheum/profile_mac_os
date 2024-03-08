@@ -1,5 +1,8 @@
 <template>
-  <div class="w-[100wv] h-[100vh] relative" @click="setToggleTrue">
+  <div
+    class="w-[100wv] h-[100vh] relative overflow-hidden"
+    @click="setToggleTrue"
+  >
     <main class="mx-auto pt-52 w-fit">
       <section class="flex flex-col w-[350px] justify-center items-center">
         <div class="w-[150px] h-[150px]">
