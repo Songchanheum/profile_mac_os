@@ -74,11 +74,7 @@ const offsetObject = reactive({
 });
 
 const removeProgram = () => {
-  if (getCurrentProgram.value === program) {
-    store.deleteProgram(program);
-  } else {
-    setProgram();
-  }
+  store.deleteProgram(program);
 };
 const setProgram = () => {
   store.addProgram(program);
