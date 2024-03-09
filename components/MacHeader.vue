@@ -11,7 +11,7 @@
           src="/assets/images/apple.svg"
           width="18"
           height="18"
-          @click="isOpen.info = !isOpen.info"
+          @click.stop="isOpen.info = !isOpen.info"
         />
       </button>
       <transition
@@ -23,7 +23,7 @@
         leave-to-class="opacity-0"
       >
         <div class="relative" v-if="isOpen.info">
-          <Dropdown :type="'info'" />
+          <Dropdown :type="'info'" :dropdownClose="dropdownClose" />
         </div>
       </transition>
     </div>
@@ -47,6 +47,11 @@ const isOpen = reactive({
   info: false,
 });
 let interval: NodeJS.Timeout;
+
+const dropdownClose = () => {
+  console.log("123");
+  isOpen.info = false;
+};
 
 onMounted(() => {
   dpTime();

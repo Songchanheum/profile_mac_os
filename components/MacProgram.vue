@@ -3,8 +3,6 @@
     class="bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px]"
     :style="offsetObject"
     ref="el"
-    @mousemove="resizeMove"
-    @mouseup="handleMouseUp"
   >
     <div class="absolute flex w-full items-center py-2">
       <p
@@ -37,7 +35,7 @@
       @mousedown="resizeDown($event, 'bottom')"
     ></div>
     <div
-      class="mt-10 w-full h-[calc(100%-40px)]"
+      class="mt-10 mx-auto w-[95%] h-[calc(100%-40px)]"
       v-if="programInfo"
       @click="setProgram"
     >

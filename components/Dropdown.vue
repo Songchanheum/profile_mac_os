@@ -27,7 +27,7 @@
         <p>프로젝트</p>
         <p>〉</p>
         <div
-          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600 bg-opacity-40 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
+          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600 bg-opacity-30 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
         >
           <NuxtLink
             href="https://songsintroduce.vercel.app/main"
@@ -70,26 +70,34 @@
       </dl>
     </div>
     <div class="z-50 py-2">
-      <dl
-        class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+      <NuxtLink to="/">
+        <dl
+          class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        >
+          화면 잠금
+        </dl></NuxtLink
       >
-        화면 잠금
-      </dl>
-      <dl
-        class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+      <NuxtLink to="/">
+        <dl
+          class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        >
+          Song Chanheum 로그아웃
+        </dl></NuxtLink
       >
-        Song Chanheum 로그아웃
-      </dl>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-const { type } = defineProps({
+const { type, dropdownClose } = defineProps({
   type: {
     type: String,
     required: true,
     default: "info",
+  },
+  dropdownClose: {
+    type: Function,
+    required: true,
   },
 });
 
@@ -98,11 +106,17 @@ const offsetSize = reactive({
   height: "fit-content",
 });
 
+const close = () => {
+  dropdownClose();
+};
+
 onMounted(() => {
-  window.addEventListener("click", () => {});
+  console.log("mount");
+  window.addEventListener("click", close);
 });
 onUnmounted(() => {
-  window.removeEventListener("click", () => {});
+  console.log("unmount");
+  window.removeEventListener("click", close);
 });
 </script>
 
