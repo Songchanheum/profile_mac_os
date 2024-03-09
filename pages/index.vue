@@ -6,7 +6,7 @@
     <main class="mx-auto pt-52 w-fit">
       <section class="flex flex-col w-[350px] justify-center items-center">
         <div class="w-[150px] h-[150px]">
-          <img src="/assets/images/dark-bg.png" class="rounded-full" />
+          <img src="/program/profile.png" class="rounded-full bg-slate-400" />
         </div>
         <h1 class="text-white text-xl shadow-black drop-shadow mt-7">
           Song Chanheum

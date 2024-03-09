@@ -1,6 +1,6 @@
 <template>
   <section
-    class="w-full h-[calc(100%-40px)] relative overflow-hidden"
+    class="w-full h-[calc(100%-40px)] relative overflow-hidden z-10"
     @mousemove="resizeMove"
     @mouseup="resizeUp"
   >
