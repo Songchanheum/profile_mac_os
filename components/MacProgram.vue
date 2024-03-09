@@ -48,6 +48,9 @@
         height="100%"
         width="100%"
       ></iframe>
+      <div v-if="programInfo.comp">
+        <Resume />
+      </div>
     </div>
   </article>
 </template>

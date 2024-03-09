@@ -37,6 +37,7 @@ export const PROGRAM_LIST = [
     size: "small",
   },
   { name: "message", img: "message.png", size: "small" },
+  { name: "Resume", size: "large", comp: true },
 ];
 
 export const FULL_SIZE = {

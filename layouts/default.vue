@@ -2,6 +2,7 @@
   <div
     class="w-[100wv] h-[100vh] bg-cover"
     :style="{ 'background-image': 'url(' + url + ')' }"
+    rel="preload"
   >
     <MacHeader :isDesktop="false" />
     <slot />

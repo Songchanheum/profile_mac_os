@@ -18,6 +18,7 @@
       </dl>
       <dl
         class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        @click="setProgram('Resume')"
       >
         이력서
       </dl>
@@ -89,6 +90,9 @@
 </template>
 
 <script lang="ts" setup>
+import { useProgramStore } from "~/stores/program";
+
+const store = useProgramStore();
 const { type, dropdownClose } = defineProps({
   type: {
     type: String,
@@ -118,6 +122,10 @@ onUnmounted(() => {
   console.log("unmount");
   window.removeEventListener("click", close);
 });
+
+const setProgram = (program: string) => {
+  store.addProgram(program);
+};
 </script>
 
 <style></style>
