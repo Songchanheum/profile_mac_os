@@ -2,30 +2,35 @@
   <header
     class="w-full bg-white h-10 bg-opacity-10 text-xs flex justify-between px-4 items-center text-white"
   >
-    <div>
-      <button
-        v-if="isDesktop"
-        class="w-12 h-7 rounded-lg hover:bg-slate-200 hover:bg-opacity-20 flex items-center justify-center"
-      >
-        <img
-          src="/assets/images/apple.svg"
-          width="18"
-          height="18"
-          @click.stop="isOpen.info = !isOpen.info"
-        />
-      </button>
-      <transition
-        enter-active-class="duration-300 ease-in"
-        enter-class="opacity-0"
-        enter-to-class="opacity-100"
-        leave-active-class="duration-300 ease-in"
-        leave-class="opacity-100"
-        leave-to-class="opacity-0"
-      >
-        <div class="relative" v-if="isOpen.info">
-          <Dropdown :type="'info'" :dropdownClose="dropdownClose" />
-        </div>
-      </transition>
+    <div class="flex items-center gap-2">
+      <div>
+        <button
+          v-if="isDesktop"
+          class="w-12 h-7 rounded-lg hover:bg-slate-200 hover:bg-opacity-20 flex items-center justify-center"
+        >
+          <img
+            src="/assets/images/apple.svg"
+            width="18"
+            height="18"
+            @click.stop="isOpen.info = !isOpen.info"
+          />
+        </button>
+        <transition
+          enter-active-class="duration-200 ease-in"
+          enter-from-class="scale-0 opacity-0"
+          enter-to-class="scale-100 opacity-100"
+          leave-active-class="duration-200 ease-in"
+          leave-class="opacity-100 scale-100"
+          leave-to-class="opacity-0 scale-0"
+        >
+          <div class="relative" v-if="isOpen.info">
+            <Dropdown :type="'info'" :dropdownClose="dropdownClose" />
+          </div>
+        </transition>
+      </div>
+      <p class="text-sm font-bold" v-if="getCurrentProgram && isDesktop">
+        {{ getCurrentProgram }}
+      </p>
     </div>
     <div class="flex gap-4 items-center">
       <img src="/assets/images/battery.svg" width="18" height="18" />
@@ -35,12 +40,16 @@
   </header>
 </template>
 <script lang="ts" setup>
+import { storeToRefs } from "pinia";
+import { useProgramStore } from "~/stores/program";
 const { isDesktop } = defineProps({
   isDesktop: {
     type: Boolean,
     default: false,
   },
 });
+const store = useProgramStore();
+const { getCurrentProgram } = storeToRefs(store);
 
 const time = ref("");
 const isOpen = reactive({

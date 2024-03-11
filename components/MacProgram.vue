@@ -23,22 +23,25 @@
       <button class="bg-green-600 rounded-full w-3 h-3"></button>
     </div>
     <div
-      class="absolute right-0 top-0 h-full cursor-col-resize w-[2px]"
-      @mousedown="resizeDown($event, 'right')"
-    ></div>
-    <div
-      class="absolute left-0 top-0 h-full cursor-col-resize w-[2px]"
-      @mousedown="resizeDown($event, 'left')"
-    ></div>
-    <div
-      class="absolute left-0 bottom-0 w-full cursor-row-resize h-[2px]"
-      @mousedown="resizeDown($event, 'bottom')"
-    ></div>
-    <div
-      class="mt-10 mx-auto w-[95%] h-[calc(100%-40px)]"
+      class="mt-10 mx-auto w-full h-[calc(100%-40px)]"
       v-if="programInfo"
       @click="setProgram"
     >
+      <div
+        class="absolute right-0 top-0 h-full cursor-col-resize w-[2px] z-50"
+        @mousedown="resizeDown($event, 'right')"
+        v-if="programInfo.comp"
+      ></div>
+      <div
+        class="absolute left-0 top-0 h-full cursor-col-resize w-[2px]"
+        @mousedown="resizeDown($event, 'left')"
+        v-if="programInfo.comp"
+      ></div>
+      <div
+        class="absolute left-0 bottom-0 w-full cursor-row-resize h-[2px]"
+        @mousedown="resizeDown($event, 'bottom')"
+        v-if="programInfo.comp"
+      ></div>
       <iframe
         @click="setProgram"
         v-if="programInfo.src"
@@ -48,9 +51,7 @@
         height="100%"
         width="100%"
       ></iframe>
-      <div v-if="programInfo.comp">
-        <Resume />
-      </div>
+      <Resume v-if="programInfo.comp && programInfo.name === 'Resume'" />
     </div>
   </article>
 </template>

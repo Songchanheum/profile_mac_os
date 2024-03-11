@@ -2,14 +2,13 @@ export const PROGRAM_LIST = [
   {
     name: "Finder",
     img: "finder.png",
-    size: "small",
+    comp: true,
   },
-  { name: "Launchpad", img: "launchpad.png" },
+  { name: "Launchpad", img: "launchpad.png", comp: true },
   {
     name: "Chrome",
     img: "chrome.svg",
     src: "https://www.google.com/webhp?igu=1",
-
     size: "large",
   },
   {
@@ -36,8 +35,9 @@ export const PROGRAM_LIST = [
     src: "https://songsintroduce.vercel.app/",
     size: "small",
   },
-  { name: "message", img: "message.png", size: "small" },
+  { name: "message", img: "message.png", size: "small", comp: true },
   { name: "Resume", size: "large", comp: true },
+  { name: "Contact Me", size: "small", comp: true },
 ];
 
 export const FULL_SIZE = {

@@ -13,6 +13,7 @@
     <div class="z-50 border-b-[1px] border-gray-500 py-2">
       <dl
         class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        @click="setProgram('Contact Me')"
       >
         Contact Me
       </dl>
@@ -20,7 +21,7 @@
         class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
         @click="setProgram('Resume')"
       >
-        이력서
+        경력 기술
       </dl>
       <dl
         class="group flex relative justify-between p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
