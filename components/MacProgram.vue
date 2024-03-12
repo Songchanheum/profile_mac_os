@@ -1,6 +1,9 @@
 <template>
   <article
-    class="bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px] transition-all duration-300"
+    :class="
+      `bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px] duration-300 ` +
+      duration
+    "
     :style="offsetObject"
     ref="el"
   >
@@ -91,6 +94,7 @@ const isDrag = ref(false);
 const isResizeDrag = ref("");
 //true > fullsize, false > resize
 const isToggle = ref(true);
+const duration = ref("transition-none");
 
 const emit = defineEmits(["is-resize", "setup-offset"]);
 const store = useProgramStore();
@@ -129,6 +133,7 @@ const handleDragStart = (e: MouseEvent) => {
   isDrag.value = true;
   setProgram();
   emit("setup-offset", handleDrop, handleMouseUp);
+  duration.value = "transition-none";
 };
 const handleDrop = (e: MouseEvent) => {
   if (isDrag.value) {
@@ -149,6 +154,7 @@ const resizeDown = (e: MouseEvent, type: string) => {
   initOffset.offsetY = e.pageY;
   isResizeDrag.value = type;
   emit("setup-offset", resizeMove, handleMouseUp);
+  duration.value = "transition-none";
 };
 
 const resizeMove = (e: MouseEvent) => {
@@ -193,6 +199,7 @@ const toggleSize = () => {
   initOffset.offsetX = Number(offsetObject.left.split("px")[0]);
   initOffset.offsetY = Number(offsetObject.top.split("px")[0]);
   isToggle.value = !isToggle.value;
+  duration.value = "transition-all";
 };
 </script>
 
