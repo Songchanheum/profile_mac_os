@@ -52,7 +52,7 @@
     </main>
     <button
       class="w-[40px] h-[40px] absolute bottom-24 left-[50%] -translate-x-[50%] bg-gray-600 bg-opacity-20 rounded-full"
-      @click="setToggleFalse"
+      @click.stop="setToggleFalse"
       v-if="pwToggle"
     >
       <p
@@ -63,23 +63,17 @@
     </button>
   </div>
 </template>
-<script lang="ts">
-export default {
-  data: () => ({
-    pwToggle: false,
-    passwd: "",
-  }),
-  methods: {
-    setToggleTrue() {
-      this.pwToggle = true;
-    },
-    setToggleFalse(e: Event) {
-      e.stopPropagation();
-      this.pwToggle = false;
-    },
-    inputPw(e: Event) {
-      this.passwd = (e.target as HTMLInputElement).value;
-    },
-  },
+<script lang="ts" setup>
+const pwToggle = ref(false);
+const passwd = ref("");
+
+const setToggleTrue = () => {
+  pwToggle.value = true;
+};
+const setToggleFalse = () => {
+  pwToggle.value = false;
+};
+const inputPw = (e: Event) => {
+  passwd.value = (e.target as HTMLInputElement).value;
 };
 </script>

@@ -58,7 +58,6 @@ const isOpen = reactive({
 let interval: NodeJS.Timeout;
 
 const dropdownClose = () => {
-  console.log("123");
   isOpen.info = false;
 };
 
