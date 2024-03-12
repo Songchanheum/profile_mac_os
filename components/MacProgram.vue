@@ -1,6 +1,6 @@
 <template>
   <article
-    class="bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px]"
+    class="bg-gray-800 rounded-lg absolute border-gray-600 border-[0.1px] transition-all duration-300"
     :style="offsetObject"
     ref="el"
   >
@@ -14,31 +14,43 @@
         {{ program }}
       </p>
     </div>
-    <div class="absolute flex gap-2 p-3 items-center">
+    <div class="absolute flex gap-2 p-3 items-center group">
       <button
-        class="bg-red-600 rounded-full w-3 h-3"
+        class="bg-red-500 rounded-full w-3 h-3"
         @click.stop="removeProgram"
-      ></button>
-      <button class="bg-yellow-600 rounded-full w-3 h-3"></button>
-      <button class="bg-green-600 rounded-full w-3 h-3"></button>
+      >
+        <!-- <p class="group-hover:block hidden">x</p> -->
+      </button>
+      <button
+        class="bg-yellow-500 rounded-full w-3 h-3"
+        @click.stop="removeProgram"
+      >
+        <!-- <p class="group-hover:block hidden">x</p> -->
+      </button>
+      <button
+        class="bg-green-500 rounded-full w-3 h-3"
+        @click.stop="toggleSize"
+      >
+        <!-- <p class="group-hover:block hidden">x</p> -->
+      </button>
     </div>
     <div
-      class="mt-10 mx-auto w-full h-[calc(100%-40px)]"
+      class="mt-9 mx-auto w-full h-[calc(100%-36px)]"
       v-if="programInfo"
       @click="setProgram"
     >
       <div
-        class="absolute right-0 top-0 h-full cursor-col-resize w-[2px] z-50"
+        class="absolute -right-[1px] top-0 h-full cursor-col-resize w-[2px] z-50"
         @mousedown="resizeDown($event, 'right')"
         v-if="programInfo.comp"
       ></div>
       <div
-        class="absolute left-0 top-0 h-full cursor-col-resize w-[2px]"
+        class="absolute -left-[1px] top-0 h-full cursor-col-resize w-[2px]"
         @mousedown="resizeDown($event, 'left')"
         v-if="programInfo.comp"
       ></div>
       <div
-        class="absolute left-0 bottom-0 w-full cursor-row-resize h-[2px]"
+        class="absolute left-0 -bottom-[1px] w-full cursor-row-resize h-[2px]"
         @mousedown="resizeDown($event, 'bottom')"
         v-if="programInfo.comp"
       ></div>
@@ -52,6 +64,7 @@
         width="100%"
       ></iframe>
       <Resume v-if="programInfo.comp && programInfo.name === 'Resume'" />
+      <Message v-if="programInfo.comp && programInfo.name === 'Message'" />
     </div>
   </article>
 </template>
@@ -76,10 +89,13 @@ const programInfo = PROGRAM_LIST.find((e) => e.name === program);
 const el = ref(null);
 const isDrag = ref(false);
 const isResizeDrag = ref("");
+//true > fullsize, false > resize
+const isToggle = ref(true);
+
 const emit = defineEmits(["is-resize", "setup-offset"]);
 const store = useProgramStore();
 
-const { getProgram, getCurrentProgram } = storeToRefs(store);
+const { getProgram } = storeToRefs(store);
 
 const initOffset = reactive({
   offsetX: index * 20,
@@ -141,7 +157,6 @@ const resizeMove = (e: MouseEvent) => {
     offsetObject.width = (compX > 0 ? compX : 0) + "px";
   } else if (isResizeDrag.value === "left") {
     const compWidth = initOffset.offsetX - e.pageX + initOffset.offsetWidth;
-    console.log(initOffset.offsetX, initOffset.offsetWidth);
     offsetObject.left = (e.pageX > 0 ? e.pageX : 0) + "px";
     offsetObject.width = compWidth + "px";
   } else if (isResizeDrag.value === "bottom") {
@@ -155,6 +170,29 @@ const handleMouseUp = () => {
   isResizeDrag.value = "";
   initOffset.offsetX = Number(offsetObject.left.split("px")[0]);
   initOffset.offsetY = Number(offsetObject.top.split("px")[0]);
+};
+
+const toggleSize = () => {
+  if (isToggle.value) {
+    offsetObject.width = (
+      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
+    ).halfWidth;
+    offsetObject.height = (
+      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
+    ).halfHeight;
+  } else {
+    offsetObject.width = (
+      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
+    ).width;
+    offsetObject.height = (
+      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
+    ).height;
+    offsetObject.left = "0px";
+    offsetObject.top = "0px";
+  }
+  initOffset.offsetX = Number(offsetObject.left.split("px")[0]);
+  initOffset.offsetY = Number(offsetObject.top.split("px")[0]);
+  isToggle.value = !isToggle.value;
 };
 </script>
 

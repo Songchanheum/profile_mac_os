@@ -1,42 +1,40 @@
 <template>
   <div
-    class="z-50 px-4 text-sm flex flex-col absolute top-2 bg-slate-600 bg-opacity-30 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
+    class="z-50 px-4 text-sm flex flex-col absolute top-2 bg-slate-600/30 rounded-lg border-[0.5px] border-gray-200 before:content-[''] before:-z-[1] before:w-full before:h-full before:rounded-lg before:left-0 before:top-0 before:absolute before:backdrop-blur before:bg-slate-600/30"
     :style="offsetSize"
   >
     <div class="z-50 border-b-[1px] border-gray-500 py-2">
-      <dl
-        class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
-      >
+      <dl class="p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer">
         이 사람에 관하여
       </dl>
     </div>
     <div class="z-50 border-b-[1px] border-gray-500 py-2">
       <dl
-        class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        class="p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer"
         @click="setProgram('Contact Me')"
       >
         Contact Me
       </dl>
       <dl
-        class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        class="p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer"
         @click="setProgram('Resume')"
       >
         경력 기술
       </dl>
       <dl
-        class="group flex relative justify-between p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+        class="group flex relative justify-between p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer"
       >
         <p>프로젝트</p>
         <p>〉</p>
         <div
-          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600 bg-opacity-30 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
+          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600/30 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
         >
           <NuxtLink
             href="https://songsintroduce.vercel.app/main"
             target="_blank"
           >
             <dl
-              class="p-1 flex w-full gap-2 hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+              class="p-1 flex w-full gap-2 hover:bg-gray-200/30 rounded-md cursor-pointer"
             >
               <img src="/program/profile.png" class="w-5 h-5" />
               <p>포트폴리오</p>
@@ -45,7 +43,7 @@
 
           <NuxtLink href="https://songsintroduce.vercel.app/" target="_blank">
             <dl
-              class="p-1 flex w-full gap-2 hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+              class="p-1 flex w-full gap-2 hover:bg-gray-200/30 rounded-md cursor-pointer"
             >
               <img src="/program/dailydev.png" class="w-5 h-5" />
               <p>Daily Dev</p>
@@ -54,7 +52,7 @@
 
           <NuxtLink href="https://songsblog.vercel.app/" target="_blank">
             <dl
-              class="p-1 flex w-full gap-2 hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+              class="p-1 flex w-full gap-2 hover:bg-gray-200/30 rounded-md cursor-pointer"
             >
               <img src="/program/blog.png" class="w-5 h-5" />
               <p>Blog Page</p>
@@ -62,7 +60,7 @@
           </NuxtLink>
           <NuxtLink href="https://github.com/Songchanheum" target="_blank">
             <dl
-              class="p-1 flex w-full gap-2 hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
+              class="p-1 flex w-full gap-2 hover:bg-gray-200/30 rounded-md cursor-pointer"
             >
               <img src="/program/github.png" class="w-5 h-5" />
               <p>Github Page</p>
@@ -73,16 +71,12 @@
     </div>
     <div class="z-50 py-2">
       <NuxtLink to="/">
-        <dl
-          class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
-        >
+        <dl class="p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer">
           화면 잠금
         </dl></NuxtLink
       >
       <NuxtLink to="/">
-        <dl
-          class="p-1 w-full hover:bg-gray-200 hover:bg-opacity-30 rounded-md cursor-pointer"
-        >
+        <dl class="p-1 w-full hover:bg-gray-200/30 rounded-md cursor-pointer">
           Song Chanheum 로그아웃
         </dl></NuxtLink
       >

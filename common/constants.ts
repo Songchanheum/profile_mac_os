@@ -35,16 +35,27 @@ export const PROGRAM_LIST = [
     src: "https://songsintroduce.vercel.app/",
     size: "small",
   },
-  { name: "message", img: "message.png", size: "small", comp: true },
+  { name: "Message", img: "message.png", size: "small", comp: true },
   { name: "Resume", size: "large", comp: true },
   { name: "Contact Me", size: "small", comp: true },
 ];
 
-export const FULL_SIZE = {
+type ProgramSize = {
+  width: string;
+  height: string;
+  halfWidth: string;
+  halfHeight: string;
+};
+
+export const FULL_SIZE: ProgramSize = {
   width: "100%",
   height: "calc(100% - 62px)",
+  halfWidth: "50%",
+  halfHeight: "50%",
 };
-export const SMALL_SIZE = {
+export const SMALL_SIZE: ProgramSize = {
   width: "40%",
   height: "70%",
+  halfWidth: "30%",
+  halfHeight: "50%",
 };
