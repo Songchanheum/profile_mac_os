@@ -71,7 +71,6 @@
     </div>
   </article>
 </template>
-
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useProgramStore } from "~/stores/program";
