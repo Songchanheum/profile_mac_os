@@ -21,7 +21,6 @@ export default defineEventHandler(async (event) => {
       },
     });
     const githubUser = await githubUserResponse.json();
-    console.log(githubUser);
     const userInfo: GithubUserInfo = {
       id: githubUser.login,
       name: githubUser.name,

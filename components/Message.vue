@@ -2,7 +2,40 @@
   <main
     class="w-full h-full bg-black/30 flex flex-col justify-between text-white"
   >
-    <section class="h-auto w-full overflow-auto"></section>
+    <section
+      class="w-full h-auto max-h-[calc(100%-100px)] overflow-x-hidden text-wrap p-2"
+      ref="sectionRef"
+    >
+      <div class="flex flex-col gap-2">
+        <div v-for="(item, idx) in messageChat" :key="idx">
+          <div class="flex gap-2" v-if="item.id !== oAuthUserInfo.id">
+            <div class="min-w-[30px]">
+              <img
+                :src="item.imgUrl"
+                width="30"
+                height="30"
+                class="bg-white rounded-full"
+              />
+            </div>
+            <div class="flex flex-col gap-1">
+              <p class="text-sm font-semibold">{{ item.name }}</p>
+              <p
+                class="whitespace-pre-line break-words bg-violet-800 px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm"
+              >
+                {{ item.message }}
+              </p>
+            </div>
+          </div>
+          <div v-else class="flex justify-end">
+            <p
+              class="whitespace-pre-line break-words bg-gray-200 text-black px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm"
+            >
+              {{ item.message }}
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
     <article
       v-if="oAuthUserInfo.id === ''"
       class="p-2 flex flex-col gap-2 items-center min-h-20 h-auto"
@@ -18,7 +51,11 @@
       </div>
       <p>로그인 후 이용하실 수 있습니다.</p>
     </article>
-    <article v-else class="p-2 flex flex-col gap-2 h-fit min-h-20">
+    <article
+      v-else
+      class="p-2 flex flex-col gap-2 h-auto min-h-20 absolute bottom-0 w-full max-h-[253px]"
+      ref="articleRef"
+    >
       <div class="flex items-center gap-2">
         <img
           :src="oAuthUserInfo.imgUrl"
@@ -28,14 +65,17 @@
         />
         <p>{{ oAuthUserInfo.name }}</p>
       </div>
-      <div class="flex items-end grow gap-2">
+      <div class="flex items-end gap-2">
         <textarea
           rows="1"
           class="py-1 px-2 max-h-[200px] rounded-xl border-[1px] border-gray-600 bg-transparent w-full resize-none focus-visible:outline-none"
           ref="textStyle"
           @input="textChange"
         />
-        <button class="w-16 h-8 rounded-lg bg-white/10">
+        <button
+          class="w-16 h-8 rounded-lg bg-white/10"
+          @click="postMessageChat"
+        >
           <img
             src="/assets/images/send.png"
             width="20"
@@ -49,6 +89,7 @@
   </main>
 </template>
 <script lang="ts" setup>
+import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 const runtimeConfig = useRuntimeConfig();
 
@@ -58,17 +99,33 @@ const oAuthUserInfo = reactive({
   imgUrl: "",
 });
 
+type MessageType = {
+  id?: string;
+  name?: string;
+  imgUrl?: string;
+  message?: string;
+};
+const messageChat = ref<MessageType[]>([]);
+const textStyle = ref<HTMLInputElement | null>(null);
+const sectionRef = ref<HTMLElement | null>(null);
+const articleRef = ref<HTMLElement | null>(null);
+
 const loginType = useCookie("login_type", {
   watch: true,
 });
 
-const textStyle = ref(null);
-
 const textChange = () => {
-  (textStyle.value as unknown as HTMLElement).style.height = "auto";
-  (textStyle.value as unknown as HTMLElement).style.height =
-    (textStyle.value as unknown as HTMLElement).scrollHeight + 4 + "px";
+  if ((textStyle.value as HTMLInputElement).scrollHeight <= 200) {
+    (textStyle.value as HTMLInputElement).style.height = "auto";
+    (textStyle.value as HTMLInputElement).style.height =
+      (textStyle.value as HTMLInputElement).scrollHeight + 4 + "px";
+    (articleRef.value as HTMLElement).style.height =
+      (textStyle.value as HTMLInputElement).scrollHeight + 54 + "px";
+    (sectionRef.value as HTMLElement).style.marginBottom =
+      (textStyle.value as HTMLInputElement).scrollHeight + 54 + "px";
+  }
 };
+
 onMounted(() => {
   if (!loginType.value) {
     google.accounts.id.initialize({
@@ -97,7 +154,28 @@ onMounted(() => {
     oAuthUserInfo.name = userInfo.name;
     oAuthUserInfo.imgUrl = userInfo.imgUrl;
   }
+  getMessageChat();
 });
+
+const getMessageChat = () => {
+  axios.get("/api/chat").then((response) => {
+    console.log(response.data);
+    messageChat.value = response.data;
+  });
+};
+
+const postMessageChat = () => {
+  axios
+    .post("/api/chat", {
+      ...oAuthUserInfo,
+      message: (textStyle.value as HTMLInputElement).value,
+    })
+    .then(() => {
+      (textStyle.value as HTMLInputElement).value = "";
+      textChange();
+      getMessageChat();
+    });
+};
 
 const handleCredentialResponse = (ref: any) => {
   const decoded = jwtDecode<any>(ref.credential);
