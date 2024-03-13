@@ -7,7 +7,6 @@ export default defineEventHandler(async (event) => {
   const code = query.code?.toString() ?? null;
   const state = query.state?.toString() ?? null;
   const storedState = getCookie(event, "github_oauth_state") ?? null;
-  console.log(code, query, state, storedState);
   if (!code || !state || !storedState || state !== storedState) {
     throw createError({
       status: 400,
@@ -22,8 +21,9 @@ export default defineEventHandler(async (event) => {
       },
     });
     const githubUser = await githubUserResponse.json();
-
+    console.log(githubUser);
     const userInfo: GithubUserInfo = {
+      id: githubUser.login,
       name: githubUser.name,
       imgUrl: githubUser.avatar_url,
     };
@@ -51,6 +51,7 @@ export default defineEventHandler(async (event) => {
 });
 
 type GithubUserInfo = {
+  id: string;
   name: string;
   imgUrl: string;
 };

@@ -12,7 +12,6 @@ export const useProgramStore = defineStore({
     addProgram(data: string) {
       this.deleteProgram(data);
       this.programList.push(data);
-      console.log(this.programList);
     },
     deleteProgram(data: string) {
       this.programList = this.programList.filter((e: string) => data !== e);
