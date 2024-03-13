@@ -16,13 +16,13 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-  layout: "desktop-layout",
-});
 import { storeToRefs } from "pinia";
 import MacProgram from "~/components/MacProgram.vue";
 import { useProgramStore } from "~/stores/program";
 
+definePageMeta({
+  layout: "desktop-layout",
+});
 // 스토어 생성
 const store = useProgramStore();
 // 반응형 객체로 변환

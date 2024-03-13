@@ -75,7 +75,12 @@
 <script lang="ts" setup>
 import { storeToRefs } from "pinia";
 import { useProgramStore } from "~/stores/program";
-import { FULL_SIZE, PROGRAM_LIST, SMALL_SIZE } from "~/common/constants";
+import {
+  FULL_SIZE,
+  PROGRAM_LIST,
+  SMALL_FIX_SIZE,
+  SMALL_SIZE,
+} from "~/common/constants";
 
 const props = defineProps({
   program: {
@@ -101,6 +106,12 @@ const store = useProgramStore();
 
 const { getProgram } = storeToRefs(store);
 
+const sizeType =
+  programInfo?.size !== "large"
+    ? programInfo?.size !== "small"
+      ? SMALL_FIX_SIZE
+      : SMALL_SIZE
+    : FULL_SIZE;
 const initOffset = reactive({
   offsetX: index * 20,
   offsetY: 0,
@@ -111,8 +122,8 @@ const initOffset = reactive({
 const offsetObject = reactive({
   left: initOffset.offsetX + "px",
   top: initOffset.offsetY + "px",
-  width: programInfo?.size === "large" ? FULL_SIZE.width : SMALL_SIZE.width,
-  height: programInfo?.size === "large" ? FULL_SIZE.height : SMALL_SIZE.height,
+  width: sizeType.width,
+  height: sizeType.height,
   zIndex: getProgram.value.indexOf(program),
 });
 
@@ -160,14 +171,14 @@ const resizeDown = (e: MouseEvent, type: string) => {
 const resizeMove = (e: MouseEvent) => {
   if (isResizeDrag.value === "right") {
     const compX = e.pageX - initOffset.offsetWidth;
-    offsetObject.width = (compX > 0 ? compX : 0) + "px";
+    offsetObject.width = (compX > 340 ? compX : 340) + "px";
   } else if (isResizeDrag.value === "left") {
     const compWidth = initOffset.offsetX - e.pageX + initOffset.offsetWidth;
     offsetObject.left = (e.pageX > 0 ? e.pageX : 0) + "px";
-    offsetObject.width = compWidth + "px";
+    offsetObject.width = (compWidth > 340 ? compWidth : 340) + "px";
   } else if (isResizeDrag.value === "bottom") {
     const compY = e.pageY - initOffset.offsetHeight;
-    offsetObject.height = (compY > 0 ? compY : 0) + "px";
+    offsetObject.height = (compY > 100 ? compY : 100) + "px";
   }
 };
 
@@ -180,19 +191,11 @@ const handleMouseUp = () => {
 
 const toggleSize = () => {
   if (isToggle.value) {
-    offsetObject.width = (
-      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
-    ).halfWidth;
-    offsetObject.height = (
-      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
-    ).halfHeight;
+    offsetObject.width = sizeType.halfWidth;
+    offsetObject.height = sizeType.halfHeight;
   } else {
-    offsetObject.width = (
-      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
-    ).width;
-    offsetObject.height = (
-      programInfo?.size === "large" ? FULL_SIZE : SMALL_SIZE
-    ).height;
+    offsetObject.width = sizeType.width;
+    offsetObject.height = sizeType.height;
     offsetObject.left = "0px";
     offsetObject.top = "0px";
   }

@@ -7,7 +7,7 @@
     <MacHeader :isDesktop="true" />
     <slot />
     <div
-      class="z-50 flex items-center gap-4 justify-center w-fit px-2 h-14 bg-white bg-opacity-10 border-gray-400 border-[1px] rounded-xl absolute bottom-1 left-[50%] -translate-x-[50%]"
+      class="backdrop-blur z-50 flex items-center gap-4 justify-center w-fit px-2 h-14 bg-white/20 border-gray-400 border-[1px] rounded-xl absolute bottom-1 left-[50%] -translate-x-[50%]"
     >
       <dl v-for="(item, idx) in prList" :key="idx" class="flex items-start">
         <MacIcon :name="item.name" :img="item.img ?? ''" />

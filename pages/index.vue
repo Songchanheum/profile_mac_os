@@ -64,6 +64,7 @@
   </div>
 </template>
 <script lang="ts" setup>
+/// <reference types='google.accounts' />
 const pwToggle = ref(false);
 const passwd = ref("");
 

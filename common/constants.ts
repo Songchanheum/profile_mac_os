@@ -33,9 +33,9 @@ export const PROGRAM_LIST = [
     name: "DailyDev",
     img: "dailydev.png",
     src: "https://songsintroduce.vercel.app/",
-    size: "small",
+    size: "small-fix",
   },
-  { name: "Message", img: "message.png", size: "small", comp: true },
+  { name: "Message", img: "message.png", size: "small-fix", comp: true },
   { name: "Resume", size: "large", comp: true },
   { name: "Contact Me", size: "small", comp: true },
 ];
@@ -55,6 +55,12 @@ export const FULL_SIZE: ProgramSize = {
 };
 export const SMALL_SIZE: ProgramSize = {
   width: "40%",
+  height: "70%",
+  halfWidth: "30%",
+  halfHeight: "50%",
+};
+export const SMALL_FIX_SIZE: ProgramSize = {
+  width: "400px",
   height: "70%",
   halfWidth: "30%",
   halfHeight: "50%",

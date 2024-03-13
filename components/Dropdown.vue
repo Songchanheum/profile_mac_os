@@ -1,6 +1,6 @@
 <template>
   <div
-    class="z-50 px-4 text-sm flex flex-col absolute top-2 bg-slate-600/30 rounded-lg border-[0.5px] border-gray-200 before:content-[''] before:-z-[1] before:w-full before:h-full before:rounded-lg before:left-0 before:top-0 before:absolute before:backdrop-blur before:bg-slate-600/30"
+    class="z-50 px-4 text-sm flex flex-col absolute top-2 bg-slate-600/30 rounded-lg border-[0.5px] border-gray-200 before:content-[''] before:-z-[1] before:w-full before:h-full before:rounded-lg before:left-0 before:top-0 before:absolute before:backdrop-blur-sm before:bg-slate-600/30"
     :style="offsetSize"
   >
     <div class="z-50 border-b-[1px] border-gray-500 py-2">
@@ -27,7 +27,7 @@
         <p>프로젝트</p>
         <p>〉</p>
         <div
-          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600/30 rounded-lg backdrop-blur border-[0.5px] border-gray-200"
+          class="p-2 hidden group-hover:flex flex-col w-40 h-fit absolute -right-40 bg-slate-600/30 rounded-lg backdrop-blur-sm border-[0.5px] border-gray-200"
         >
           <NuxtLink
             href="https://songsintroduce.vercel.app/main"
