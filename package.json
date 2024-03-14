@@ -12,6 +12,7 @@
   "dependencies": {
     "@pinia/nuxt": "^0.5.1",
     "@types/google.accounts": "^0.0.14",
+    "@vercel/analytics": "^1.2.2",
     "@vercel/kv": "^1.0.1",
     "arctic": "^1.2.1",
     "axios": "^1.6.7",
