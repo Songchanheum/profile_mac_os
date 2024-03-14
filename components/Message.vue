@@ -7,7 +7,11 @@
       ref="sectionRef"
     >
       <div class="flex flex-col gap-2">
-        <div v-for="(item, idx) in messageChat" :key="idx">
+        <div
+          v-for="(item, idx) in messageChat"
+          :key="idx"
+          class="relative group"
+        >
           <div class="flex gap-2" v-if="item.id !== oAuthUserInfo.id">
             <div class="min-w-[30px]">
               <img
@@ -17,18 +21,25 @@
                 class="bg-white rounded-full"
               />
             </div>
-            <div class="flex flex-col gap-1">
+            <div class="flex flex-col gap-1 w-full">
               <p class="text-sm font-semibold">{{ item.name }}</p>
               <p
-                class="whitespace-pre-line break-words bg-violet-800 px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm"
+                class="whitespace-pre-line break-words bg-violet-800 px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm rounded-tl-none"
               >
                 {{ item.message }}
               </p>
+              <button
+                v-if="oAuthUserInfo.id === 'bsk9212@gmail.com'"
+                class="group-hover:block hidden absolute top-10 left-1 px-2 rounded-full bg-slate-600"
+                @click="removeChatMessage($event, idx)"
+              >
+                X
+              </button>
             </div>
           </div>
           <div v-else class="flex justify-end">
             <p
-              class="whitespace-pre-line break-words bg-gray-200 text-black px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm"
+              class="whitespace-pre-line break-words bg-gray-200 text-black px-4 py-1 rounded-2xl w-fit max-w-[90%] text-sm rounded-tr-none"
             >
               {{ item.message }}
             </p>
@@ -123,6 +134,10 @@ const textChange = () => {
       (textStyle.value as HTMLInputElement).scrollHeight + 54 + "px";
     (sectionRef.value as HTMLElement).style.marginBottom =
       (textStyle.value as HTMLInputElement).scrollHeight + 54 + "px";
+    (sectionRef.value as HTMLDivElement).scrollTo({
+      top: (sectionRef.value as HTMLDivElement).scrollHeight,
+      behavior: "smooth",
+    });
   }
 };
 
@@ -156,10 +171,15 @@ onMounted(() => {
   }
   getMessageChat();
 });
+onUpdated(() => {
+  (sectionRef.value as HTMLDivElement).scrollTo({
+    top: (sectionRef.value as HTMLDivElement).scrollHeight,
+    behavior: "smooth",
+  });
+});
 
 const getMessageChat = () => {
   axios.get("/api/chat").then((response) => {
-    console.log(response.data);
     messageChat.value = response.data;
   });
 };
@@ -173,6 +193,15 @@ const postMessageChat = () => {
     .then(() => {
       (textStyle.value as HTMLInputElement).value = "";
       textChange();
+      getMessageChat();
+    });
+};
+const removeChatMessage = (e: Event, idx: number) => {
+  axios
+    .patch("/api/chat", {
+      index: idx,
+    })
+    .then(() => {
       getMessageChat();
     });
 };
